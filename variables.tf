@@ -1,5 +1,5 @@
 variable "is_production" {
-  default = false
+  default = true
 }
 
 variable "to_create" {
