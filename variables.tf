@@ -33,7 +33,7 @@ variable "key_name" {
 variable "sg_name" {
   description = "Tag-name of EC2 security group"
   type        = string
-  default     = "lcchua-ssh-http-htttps" # Replace with your own preferred security group name that gives an overview of the security group coverage
+  default     = "lcchua-ssh-http-https" # Replace with your own preferred security group name that gives an overview of the security group coverage
 }
 
 variable "vpc_name" {
