@@ -3,7 +3,7 @@ variable "is_production" {
 }
 
 variable "to_create" {
-    default = false
+    default = true
 }
 
 variable "ami_id" {
