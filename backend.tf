@@ -16,3 +16,4 @@ terraform {
     key    = "tf-gh-action-lcchua-dev.tfstate"
     region = "us-east-1"
   }
+}
