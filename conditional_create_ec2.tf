@@ -70,7 +70,7 @@ resource "aws_instance" "sample_ec2_variables" {
   subnet_id     = data.aws_subnet.selected_subnet.id
   associate_public_ip_address = true
   # vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  vpc_security_group_ids = [aws_security_group.selected_secgrp.id]
+  vpc_security_group_ids = [data.aws_security_group.selected_secgrp.id]
 
   ## Creates one EC2 if to_create == true
   count = var.to_create ? 1 : 0
@@ -79,7 +79,11 @@ resource "aws_instance" "sample_ec2_variables" {
     Name = var.ec2_name
   }
 }
-output"ec2_instance_id" {
+output "ec2_instance_id" {
   description = "ID of the 1st EC2 instance"
   value       = length(aws_instance.sample_ec2_variables) > 0 ? aws_instance.sample_ec2_variables[0].id : "no instance created"
+}
+output "vpc_id" {
+  description = "ID of the vpc used in the EC2 instance"
+  value       = data.aws_vpc.selected_vpc.id
 }
