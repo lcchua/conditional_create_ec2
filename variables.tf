@@ -3,7 +3,7 @@ variable "is_production" {
 }
 
 variable "to_create" {
-    default = flase
+    default = false
 }
 
 variable "ami_id" {
@@ -46,4 +46,10 @@ variable "subnet_name" {
   description = "Name of subnet to use"
   type        = string
   default     = "lcchua-vpc-ssh-subnet-public1-us-east-1a" # Update with your own Subnet name, found under VPC > your VPC > selected Public Subnet > tags > value of Name
+}
+
+variable "region" {
+  description = "Name of aws region"
+  type        = string
+  default     = "us-east-1"
 }
