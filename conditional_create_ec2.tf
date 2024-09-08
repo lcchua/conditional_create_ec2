@@ -69,3 +69,7 @@ resource "aws_instance" "sample_ec2_variables" {
     Name = var.ec2_name
   }
 }
+output"ec2_instance_id" {
+  description = "ID of the 1st EC2 instance"
+  value       = length(aws_instance.sample_ec2_variables) > 0 ? aws_instance.sample_ec2_variables[0].id : "no instance created"
+}

@@ -3,7 +3,7 @@ variable "is_production" {
 }
 
 variable "to_create" {
-    default = true
+    default = flase
 }
 
 variable "ami_id" {
