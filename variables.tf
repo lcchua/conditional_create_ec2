@@ -21,7 +21,7 @@ variable "ec2_name" {
 variable "instance_type" {
   description = "EC2 Instance type"
   type        = string
-  default     = "t2.micro"
+  default     = var.is_production ? "t2.small" : "t2.micro"
 }
 
 variable "key_name" {
