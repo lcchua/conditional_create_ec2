@@ -65,7 +65,7 @@ data "aws_security_group" "selected_secgrp" {
 
 resource "aws_instance" "sample_ec2_variables" {
   ami           = var.ami_id
-  instance_type = var.instance_type
+  instance_type = var.is_production ? var.instance_type_prod : var.instance_type_dev
   key_name      = var.key_name
   subnet_id     = data.aws_subnet.selected_subnet.id
   associate_public_ip_address = true

@@ -18,10 +18,16 @@ variable "ec2_name" {
   default     = "lcchua-conditional-ec2-from-tf" # Replace with your preferred EC2 Instance Name 
 }
 
-variable "instance_type" {
+variable "instance_type_dev" {
   description = "EC2 Instance type"
   type        = string
-  default     = var.is_production ? "t2.small" : "t2.micro"
+  default     = "t2.micro"
+}
+
+variable "instance_type_prod" {
+  description = "EC2 Instance type"
+  type        = string
+  default     = "t2.small"
 }
 
 variable "key_name" {
