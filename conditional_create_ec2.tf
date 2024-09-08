@@ -6,7 +6,7 @@ output "environment_message" {
   value = var.is_production ? "Production Environment" : "Non-Production Environment"
 }
 
-# Uses an existing VPC, filtered by vpc_name defined in variables.tf
+# Use an existing VPC, filtered by vpc_name defined in variables.tf
 data "aws_vpc" "selected_vpc" {
   filter {
     name   = "tag:Name"
@@ -14,7 +14,7 @@ data "aws_vpc" "selected_vpc" {
   }
 }
 
-# Uses an existing subnet, filtered by subnet_name defined in variables.tf
+# Use an existing subnet, filtered by subnet_name defined in variables.tf
 data "aws_subnet" "selected_subnet" {
   filter {
     name   = "tag:Name"
@@ -22,7 +22,14 @@ data "aws_subnet" "selected_subnet" {
   }
 }
 
-resource "aws_security_group" "ec2_sg" {
+# Use an existing security group, filtered by security group name in variables.tf
+data "aws_security_group" "selected_secgrp" {
+  filter {
+    name    = "tag:Name"
+    values  = [var.sg_name]
+  }
+}
+/* resource "aws_security_group" "ec2_sg" {
   name   = var.sg_name
   vpc_id = data.aws_vpc.selected_vpc.id # var.vpc_id
 
@@ -54,7 +61,7 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-}
+} */
 
 resource "aws_instance" "sample_ec2_variables" {
   ami           = var.ami_id
@@ -62,7 +69,8 @@ resource "aws_instance" "sample_ec2_variables" {
   key_name      = var.key_name
   subnet_id     = data.aws_subnet.selected_subnet.id
   associate_public_ip_address = true
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+  # vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.selected_secgrp.id]
 
   ## Creates one EC2 if to_create == true
   count = var.to_create ? 1 : 0
